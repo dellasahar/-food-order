@@ -5,20 +5,7 @@ export const metadata: Metadata = {
   title: 'FoodOrder — Pesan Makanan Favoritmu',
   description: 'Aplikasi pemesanan makanan sederhana yang cepat, jelas, dan mudah digunakan.',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
+    icon: '/foodorder-icon.svg',
     apple: '/apple-icon.png',
   },
 }
