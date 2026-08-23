@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("MYSQL_DATABASE_URL")
+}
+
+enum OrderStatus {
+  DRAFT
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  orders    Order[]
+  createdAt DateTime @default(now())
+}
+
+model Product {
+  id          Int         @id @default(autoincrement())
+  name        String
+  price       Int
+  stock       Int
+  description String      @db.Text
+  category    String
+  image       String
+  items       OrderItem[]
+  createdAt   DateTime    @default(now())
+}
+
+model Order {
+  id             Int         @id @default(autoincrement())
+  orderNumber    String      @unique
+  userId         Int
+  user           User        @relation(fields: [userId], references: [id])
+  recipientName  String
+  shippingAddress String
+  phone          String
+  total          Int
+  status         OrderStatus @default(DRAFT)
+  items          OrderItem[]
+  createdAt      DateTime    @default(now())
+}
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  quantity  Int
+  price     Int
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+// Seed credentials: user@foodorder.com / password123
+// Demo products: Nasi Goreng Spesial, Mie Ayam, Ayam Geprek, Es Teh, Jus Alpukat
+
+// Run locally with:
+// MYSQL_DATABASE_URL="mysql://root:password@localhost:3306/foodorder" pnpm prisma migrate dev --name init
+// pnpm prisma db seed
+
