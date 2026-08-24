@@ -2,6 +2,8 @@ import { prisma } from '@/lib/prisma'
 import { fail, ok, readJson } from '@/lib/api'
 import { createOrder } from '@/lib/business'
 
+export const runtime = 'edge'
+
 export async function GET() {
   if (!process.env.MYSQL_DATABASE_URL) return fail('Database belum dikonfigurasi. Set MYSQL_DATABASE_URL terlebih dahulu.', 500)
   try { return ok(await prisma.order.findMany({ include: { items: { include: { product: true } } }, orderBy: { id: 'desc' } }), 200, 'Orders fetched.') }

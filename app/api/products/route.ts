@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma'
 import { fail, ok, readJson } from '@/lib/api'
 
+export const runtime = 'edge'
+
 function validateProduct(input: Record<string, unknown>) {
   if (typeof input.name !== 'string' || !input.name.trim()) return 'Product name is required.'
   if (typeof input.price !== 'number' || !Number.isInteger(input.price) || input.price <= 0) return 'Price must be a positive integer.'

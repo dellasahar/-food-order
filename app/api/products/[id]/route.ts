@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma'
 import { fail, ok, parseId, readJson } from '@/lib/api'
 
+export const runtime = 'edge'
+
 function fields(body: Record<string, unknown>) {
   if (typeof body.name !== 'string' || !body.name.trim()) return 'Product name is required.'
   if (typeof body.price !== 'number' || !Number.isInteger(body.price) || body.price <= 0) return 'Price must be a positive integer.'

@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma'
 import { fail, ok, parseId } from '@/lib/api'
 
+export const runtime = 'edge'
+
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   if (!process.env.MYSQL_DATABASE_URL) return fail('Database belum dikonfigurasi. Set MYSQL_DATABASE_URL terlebih dahulu.', 500)
   const raw = (await params).id
