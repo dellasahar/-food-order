@@ -2,7 +2,7 @@ import { prisma } from '@/lib/prisma'
 import { fail, ok, parseId, readJson } from '@/lib/api'
 import { updateOrderStatus, type OrderStatus } from '@/lib/business'
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const raw = (await params).id

@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { fail, ok, parseId, readJson } from '@/lib/api'
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 
 function fields(body: Record<string, unknown>) {
   if (typeof body.name !== 'string' || !body.name.trim()) return 'Product name is required.'

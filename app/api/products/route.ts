@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { fail, ok, readJson } from '@/lib/api'
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 
 function validateProduct(input: Record<string, unknown>) {
   if (typeof input.name !== 'string' || !input.name.trim()) return 'Product name is required.'

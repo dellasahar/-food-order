@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { fail, ok, parseId } from '@/lib/api'
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   const raw = (await params).id

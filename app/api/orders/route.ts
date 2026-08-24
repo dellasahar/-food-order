@@ -2,7 +2,7 @@ import { prisma } from '@/lib/prisma'
 import { fail, ok, readJson } from '@/lib/api'
 import { createOrder } from '@/lib/business'
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 
 export async function GET() {
   try { return ok(await prisma.order.findMany({ include: { items: { include: { product: true } } }, orderBy: { id: 'desc' } }), 200, 'Orders fetched.') }
