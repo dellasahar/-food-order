@@ -5,13 +5,11 @@ import { createOrder } from '@/lib/business'
 export const runtime = 'edge'
 
 export async function GET() {
-  if (!process.env.MYSQL_DATABASE_URL) return fail('Database belum dikonfigurasi. Set MYSQL_DATABASE_URL terlebih dahulu.', 500)
   try { return ok(await prisma.order.findMany({ include: { items: { include: { product: true } } }, orderBy: { id: 'desc' } }), 200, 'Orders fetched.') }
   catch { return fail('Database unavailable.', 500) }
 }
 
 export async function POST(request: Request) {
-  if (!process.env.MYSQL_DATABASE_URL) return fail('Database belum dikonfigurasi. Set MYSQL_DATABASE_URL terlebih dahulu.', 500)
   const body = await readJson<{ userId?: number; recipientName?: string; shippingAddress?: string; phone?: string; lines?: Array<{ productId: number; quantity: number }> }>(request)
   if (body.error) return body.error
   if (!Array.isArray(body.value.lines)) return fail('lines are required.', 400)

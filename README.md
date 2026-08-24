@@ -20,3 +20,20 @@ Analisis kebutuhan, state transition, white-box testing, TDD checklist, dan temp
 - `pnpm test:e2e:ci` — Starts Next.js and runs Cypress headlessly.
 
 The Cypress suite uses Page Objects in `cypress/support/pages.ts` and stable `data-testid` selectors. The API suite checks status codes, JSON contracts, validation errors, response headers, and a five-second response budget.
+
+## Vercel deployment
+
+This project is configured to deploy as a standard Next.js app on Vercel.
+
+Required environment variables in Vercel:
+
+- `MYSQL_DATABASE_URL` — MySQL connection string for Prisma
+- `NEXT_PUBLIC_APP_URL` — public app URL, e.g. `https://your-app.vercel.app`
+
+Recommended Vercel build settings:
+
+- Framework: Next.js
+- Build command: `pnpm build`
+- Install command: `pnpm install`
+
+The repository includes a `vercel.json` file to keep the deployment settings explicit.

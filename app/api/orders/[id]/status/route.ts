@@ -5,7 +5,6 @@ import { updateOrderStatus, type OrderStatus } from '@/lib/business'
 export const runtime = 'edge'
 
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
-  if (!process.env.MYSQL_DATABASE_URL) return fail('Database belum dikonfigurasi. Set MYSQL_DATABASE_URL terlebih dahulu.', 500)
   const raw = (await params).id
   const id = parseId(raw)
   const body = await readJson<{ status?: OrderStatus }>(request)
